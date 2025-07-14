@@ -5,7 +5,8 @@
   "description": "Image resizing app",
   "main": "main.js",
   "scripts": {
-    "start":"electron ."
+    "start":"electron .",
+    "dev" :"npx electronmon ."
   },
   "keywords": [],
   "author": "Louis",
