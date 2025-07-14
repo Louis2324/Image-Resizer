@@ -15,6 +15,7 @@ function createMainWindow () {
     if(isDev) mainWindow.webContents.openDevTools();
     mainWindow.loadFile(path.join(__dirname,"./renderer/index.html"));
 }
+
 function createAboutWindow () {
     const aboutWindow = new BrowserWindow({
         title:"About Image Resizer",
@@ -62,7 +63,6 @@ app.whenReady().then(()=>{
      const mainMenu = Menu.buildFromTemplate(menu);
      Menu.setApplicationMenu(mainMenu);
 });
-
 
 app.on('window-all-closed', ()=>{
     if(isMac){
