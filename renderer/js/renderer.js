@@ -5,7 +5,6 @@ const filename = document.querySelector('#filename');
 const heightInput = document.querySelector('#height');
 const widthInput = document.querySelector('#width');
 
-
 function loadImage(e) {
     const file = e.target.files[0];
     if(!isImg(file)){
@@ -22,6 +21,7 @@ function loadImage(e) {
     }
     form.style.display = 'block';
     filename.innerText = file.name;
+    outputPath.innerText = window.path.join(window.os.homedir(),'imageresizer');
 }
 
 
