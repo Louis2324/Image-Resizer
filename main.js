@@ -9,8 +9,14 @@ function createMainWindow () {
         title:"Image Resizer",
         width:isDev?1000:500,
         height:600,
+         webPreferences: {
+            contextIsolation: true,
+            nodeIntegration: false,
+            sandbox:false, 
+            preload: path.join(__dirname, './preload.js'),
+        }
     });
-
+    console.log(path.join(__dirname, 'preload.js'))
     //dev-tools
     if(isDev) mainWindow.webContents.openDevTools();
     mainWindow.loadFile(path.join(__dirname,"./renderer/index.html"));
