@@ -18,12 +18,37 @@ function createMainWindow () {
 function createAboutWindow () {
     const aboutWindow = new BrowserWindow({
         title:"About Image Resizer",
-        width:isDev?600:300,
+        width:300,
         height:300,
     });
 
     aboutWindow.loadFile(path.join(__dirname,"./renderer/about.html"));
 }
+
+const menu = [
+...(isMac?[
+    {
+        label:app.name,
+        submenu:
+        [
+            {
+                label: 'About',
+                click: createAboutWindow
+            },
+        ]
+    }
+  ]:[]),
+ {
+   role: "fileMenu"
+ },
+ ...(!isMac?[{
+    label: 'Help',
+    submenu: [{
+        label:"About",
+        click: createAboutWindow,
+    }],
+ }]:[]),
+];
 
 app.whenReady().then(()=>{
     createMainWindow();
@@ -38,28 +63,6 @@ app.whenReady().then(()=>{
      Menu.setApplicationMenu(mainMenu);
 });
 
-const menu = [
-...(isMac?[
-    {
-        label:app.name,
-        submenu:
-        [
-            {
-                label: 'About',
-            },
-        ]
-    }
-  ]:[]),
- {
-   role: "fileMenu"
- },
- ...(!isMac?[{
-    label: 'Help',
-    submenu: [{
-        label:"About",
-    }],
- }]:[]),
-];
 
 app.on('window-all-closed', ()=>{
     if(isMac){
