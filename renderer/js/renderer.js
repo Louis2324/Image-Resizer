@@ -8,7 +8,7 @@ const widthInput = document.querySelector('#width');
 function loadImage(e) {
     const file = e.target.files[0];
     if(!isImg(file)){
-        console.log("Select an image");
+        alertMsg("Please select an image","e");
         return;
     }
 
@@ -29,4 +29,21 @@ function isImg (file) {
     const formats = ['image/gif','image/png','image/jpeg'];
     return file && formats.includes(file.type);
 }
+
+function alertMsg(message, state = "s") {
+    const success = state === "s";
+
+    Toastify({
+        text: message,
+        duration: 3000,
+        close: false,
+        style: {
+            background: success ? "green" : "red",
+            color: "white",
+            textAlign: "center",
+        }
+    }).showToast(); // ✅ call showToast() on the result
+}
+
+
 img.addEventListener("change",loadImage);
