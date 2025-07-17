@@ -45,5 +45,33 @@ function alertMsg(message, state = "s") {
     }).showToast(); // ✅ call showToast() on the result
 }
 
+function sendImage(e) {
 
+    const width = widthInput.value;
+    const height = heightInput.value;
+    const imgPath = img.files[0].path;
+
+    e.preventDefault();
+    if(!img.files[0]){
+        alertMsg("please upload an image","e");
+        return;
+    }
+
+    if(!width || !height || width === "" || height === "") {
+        alertMsg("please fill in a height and a width","e");
+        return;
+    }
+
+    window.ipcRenderer.send('image:resize', {
+        imgPath,
+        width,
+        height,
+    })
+
+}
+
+window.ipcRenderer.on("image:done",()=>{
+    alertMsg(`Image resize complete`,"s");
+});
 img.addEventListener("change",loadImage);
+form.addEventListener("submit",sendImage);
